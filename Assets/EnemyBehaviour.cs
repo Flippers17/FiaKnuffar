@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Events;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Vector3 _fallPosition;
     private bool _pushed = false;
+
+    public int defense = 1;
+    public float quickTimeSpeed = 50;
+
+    public UnityEvent OnFall;
     
 
     // Start is called before the first frame update
@@ -43,7 +49,6 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Vector3 moveDif = moveSpeed * moveDir * Time.deltaTime;
 
-            Debug.Log("Hej");
             if (Vector3.Distance(transform.position, _fallPosition) < moveDif.magnitude)
             {
                 transform.position = _fallPosition;
@@ -58,5 +63,6 @@ public class EnemyBehaviour : MonoBehaviour
 
         _rb.velocity = pushVelocity;
         _rb.isKinematic = false;
+        OnFall?.Invoke();
     }
 }
