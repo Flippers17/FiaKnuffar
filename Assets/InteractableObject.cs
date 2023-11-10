@@ -30,6 +30,16 @@ public class InteractableObject : MonoBehaviour
         if (_outlineGO)
             _outlineGO.SetActive(false);
     }
+    public void ThrowItem(Vector3 dir, float throwForce)
+    {
+        _rb.isKinematic = false;
+        _col.enabled = true;
+
+        _rb.AddForce(dir * throwForce, ForceMode.Impulse);
+
+        transform.parent = null;
+    }
+
     public void DropItem()
     {
         _rb.isKinematic = false;

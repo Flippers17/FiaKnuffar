@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class WeaponDataSO : ScriptableObject
 {
-    public float knockForce;
+    public float pushVelocity;
     public Vector3 areaOfEffect;
 }
