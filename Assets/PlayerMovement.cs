@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = false;
 
     private Transform camTransform;
+    private Vector3 facingDir = new Vector3(0, 0, 1);
+    [SerializeField]
+    private float _turnSpeed = 0.5f;
 
     private void Awake()
     {
@@ -49,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && _input.rememberJumpInput)
             Jump();
+
+        HandleRotation();
     }
 
 
@@ -73,8 +78,17 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = new Vector2(camTransform.forward.x, camTransform.forward.z) * moveInput.y + new Vector2(camTransform.right.x, camTransform.right.z) * moveInput.x;
         moveInput.Normalize();
+
+        if (moveInput.magnitude != 0)
+            facingDir = new Vector3(moveInput.x, 0, moveInput.y);
+        
         _velocity.x = moveInput.x * _moveSpeed;
         _velocity.z = moveInput.y * _moveSpeed;
+    }
+
+    private void HandleRotation()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), _turnSpeed);
     }
 
     private void HandleGravity()
