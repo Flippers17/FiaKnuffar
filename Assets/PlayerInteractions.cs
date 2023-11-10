@@ -17,11 +17,13 @@ public class PlayerInteractions : MonoBehaviour
     private void OnEnable()
     {
         _input.OnInteract += Interact;
+        _input.OnDrop += DropItem;
     }
 
     private void OnDisable()
     {
         _input.OnInteract -= Interact;
+        _input.OnDrop -= DropItem;
     }
 
     private void Interact()
@@ -34,17 +36,21 @@ public class PlayerInteractions : MonoBehaviour
 
             EquipItem();
         }
-        else if (!_currentClosestInteractable)
-        {
-            _currentHeldObject.DropItem();
-            _currentHeldObject = null;
-        }
         else
         {
             _currentHeldObject.DropItem();
             _currentHeldObject = _currentClosestInteractable;
 
             EquipItem();
+        }
+    }
+
+    private void DropItem()
+    {
+        if (_currentHeldObject)
+        {
+            _currentHeldObject.DropItem();
+            _currentHeldObject = null;
         }
     }
 

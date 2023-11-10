@@ -9,12 +9,14 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] private WeaponDataSO _weaponData;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Collider _col;
+    [SerializeField] private GameObject _outlineGO;
 
     public WeaponDataSO weaponData => _weaponData;
 
     public void InRange()
     {
-        Debug.Log("In Range: " + gameObject.name);
+        if (_outlineGO)
+            _outlineGO.SetActive(true);
     }
     public void Interact()
     {
@@ -25,7 +27,8 @@ public class InteractableObject : MonoBehaviour
     }
     public void OutOfRange()
     {
-        Debug.Log("Out Of Range: " + gameObject.name);
+        if (_outlineGO)
+            _outlineGO.SetActive(false);
     }
     public void DropItem()
     {

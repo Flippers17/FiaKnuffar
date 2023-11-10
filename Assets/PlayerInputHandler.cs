@@ -12,6 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public UnityAction<Vector2> OnMove;
     public UnityAction OnPush;
     public UnityAction OnInteract;
+    public UnityAction OnDrop;
 
     public bool rememberJumpInput = false;
     [SerializeField]
@@ -27,6 +28,13 @@ public class PlayerInputHandler : MonoBehaviour
         _input.actions["Push"].performed += OnPushInput;
 
         _input.actions["Interact"].performed += OnInteractInput;
+
+        _input.actions["DropItem"].performed += OnDropInput;
+    }
+
+    private void OnDropInput(InputAction.CallbackContext obj)
+    {
+        OnDrop?.Invoke();
     }
 
     private void OnDisable()
