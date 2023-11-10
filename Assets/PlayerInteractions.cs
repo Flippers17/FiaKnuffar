@@ -4,13 +4,14 @@ using UnityEngine.Events;
 public class PlayerInteractions : MonoBehaviour
 {
     [SerializeField][Min(0.1f)][Tooltip("Range for interactive items!")] private float _raduis = 1;
+    [SerializeField] private Transform _interactionCenter;
     [SerializeField] private LayerMask _interactiveLayer;
     [SerializeField] private PlayerInputHandler _input;
     [SerializeField] private Transform weaponHolder;
 
-    public UnityEvent<WeaponDataSO> OnPickup;
+    public WeaponDataSO currentWeaponData => _currentHeldObject.weaponData;
 
-    private InteractableObject _currentInteractable;
+    private InteractableObject _currentClosestInteractable;
     private InteractableObject _currentHeldObject;
 
     private void OnEnable()
@@ -25,18 +26,23 @@ public class PlayerInteractions : MonoBehaviour
 
     private void Interact()
     {
-        if (!_currentInteractable)
+        if (!_currentClosestInteractable)
             return;
         if (!_currentHeldObject)
         {
-            _currentHeldObject = _currentInteractable;
+            _currentHeldObject = _currentClosestInteractable;
 
             EquipItem();
+        }
+        else if (!_currentClosestInteractable)
+        {
+            _currentHeldObject.DropItem();
+            _currentHeldObject = null;
         }
         else
         {
             _currentHeldObject.DropItem();
-            _currentHeldObject = _currentInteractable;
+            _currentHeldObject = _currentClosestInteractable;
 
             EquipItem();
         }
@@ -47,19 +53,17 @@ public class PlayerInteractions : MonoBehaviour
         _currentHeldObject.transform.parent = weaponHolder;
         _currentHeldObject.transform.localPosition = Vector3.zero;
 
-        WeaponDataSO data = _currentHeldObject.Interact();
-        if (data)
-            OnPickup?.Invoke(data);
+        _currentHeldObject.Interact();
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, _raduis);
+        Gizmos.DrawWireSphere(_interactionCenter.position, _raduis);
     }
 
     private void Update()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _raduis, _interactiveLayer);
+        Collider[] hits = Physics.OverlapSphere(_interactionCenter.position, _raduis, _interactiveLayer);
 
         if (hits.Length > 0)
         {
@@ -71,7 +75,7 @@ public class PlayerInteractions : MonoBehaviour
 
                 if(hits[i].TryGetComponent(out InteractableObject interactable))
                 {
-                    float distance = Vector3.Distance(transform.position, hits[i].transform.position);
+                    float distance = Vector3.Distance(_interactionCenter.position, hits[i].transform.position);
 
                     if (distance < closestDistance)
                     {
@@ -81,20 +85,20 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
 
-            if(closestInteractable != _currentInteractable)
+            if(closestInteractable != _currentClosestInteractable)
             {
-                if(_currentInteractable)
-                    _currentInteractable.OutOfRange();
-                _currentInteractable = closestInteractable;
-                _currentInteractable.InRange();
+                if(_currentClosestInteractable)
+                    _currentClosestInteractable.OutOfRange();
+                _currentClosestInteractable = closestInteractable;
+                _currentClosestInteractable.InRange();
             }
         }
         else
         {
-            if(_currentInteractable)
+            if(_currentClosestInteractable)
             {
-                _currentInteractable.OutOfRange();
-                _currentInteractable = null;
+                _currentClosestInteractable.OutOfRange();
+                _currentClosestInteractable = null;
             }
         }
     }

@@ -6,22 +6,22 @@ using UnityEngine.Events;
 public class InteractableObject : MonoBehaviour
 {
     public UnityAction OnInteract;
-    [SerializeField] private WeaponDataSO weaponData;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Collider col;
+    [SerializeField] private WeaponDataSO _weaponData;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private Collider _col;
+
+    public WeaponDataSO weaponData => _weaponData;
 
     public void InRange()
     {
         Debug.Log("In Range: " + gameObject.name);
     }
-    public WeaponDataSO Interact()
+    public void Interact()
     {
-        rb.useGravity = false;
-        col.enabled = false;
+        _rb.useGravity = false;
+        _col.enabled = false;
 
         OnInteract?.Invoke();
-
-        return weaponData;
     }
     public void OutOfRange()
     {
@@ -29,8 +29,8 @@ public class InteractableObject : MonoBehaviour
     }
     public void DropItem()
     {
-        rb.useGravity = true;
-        col.enabled = true;
+        _rb.useGravity = true;
+        _col.enabled = true;
 
         transform.parent = null;
     }
