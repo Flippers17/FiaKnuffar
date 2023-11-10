@@ -20,7 +20,7 @@ public class InteractableObject : MonoBehaviour
     }
     public void Interact()
     {
-        _rb.useGravity = false;
+        _rb.isKinematic = true;
         _col.enabled = false;
 
         OnInteract?.Invoke();
@@ -32,7 +32,7 @@ public class InteractableObject : MonoBehaviour
     }
     public void DropItem()
     {
-        _rb.useGravity = true;
+        _rb.isKinematic = false;
         _col.enabled = true;
 
         transform.parent = null;
