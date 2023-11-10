@@ -27,28 +27,29 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (!_currentInteractable)
             return;
-
-        Debug.Log("Yes");
         if (!_currentHeldObject)
         {
             _currentHeldObject = _currentInteractable;
 
-            _currentHeldObject.transform.parent = weaponHolder;
-            _currentHeldObject.transform.position = Vector3.zero;
-
-            WeaponDataSO data = _currentHeldObject.Interact();
-            if (data)
-                OnPickup?.Invoke(data);
+            EquipItem();
         }
         else
         {
             _currentHeldObject.DropItem();
             _currentHeldObject = _currentInteractable;
 
-            WeaponDataSO data = _currentHeldObject.Interact();
-            if (data)
-                OnPickup?.Invoke(data);
+            EquipItem();
         }
+    }
+
+    private void EquipItem()
+    {
+        _currentHeldObject.transform.parent = weaponHolder;
+        _currentHeldObject.transform.localPosition = Vector3.zero;
+
+        WeaponDataSO data = _currentHeldObject.Interact();
+        if (data)
+            OnPickup?.Invoke(data);
     }
 
     private void OnDrawGizmos()
@@ -60,8 +61,6 @@ public class PlayerInteractions : MonoBehaviour
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, _raduis, _interactiveLayer);
 
-        Debug.Log(hits.Length);
-
         if (hits.Length > 0)
         {
             InteractableObject closestInteractable = null;
@@ -72,8 +71,6 @@ public class PlayerInteractions : MonoBehaviour
 
                 if(hits[i].TryGetComponent(out InteractableObject interactable))
                 {
-                    Debug.Log("Interactable: " + interactable.gameObject.name);
-
                     float distance = Vector3.Distance(transform.position, hits[i].transform.position);
 
                     if (distance < closestDistance)
@@ -84,11 +81,10 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
 
-            Debug.Log("Current: " + _currentInteractable);
-
             if(closestInteractable != _currentInteractable)
             {
-                _currentInteractable.OutOfRange();
+                if(_currentInteractable)
+                    _currentInteractable.OutOfRange();
                 _currentInteractable = closestInteractable;
                 _currentInteractable.InRange();
             }
