@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
         HandleRotation();
+        HandleVelocity();
     }
 
 
@@ -61,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = IsGrounded();
         HandleGravity();
-        HandleVelocity();
     }
 
     private bool IsGrounded()
@@ -98,6 +98,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleVelocity()
     {
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        _controller.Move(_velocity * Time.deltaTime);
     }
 }
