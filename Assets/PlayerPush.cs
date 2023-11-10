@@ -67,7 +67,7 @@ public class PlayerPush : MonoBehaviour
         else
         {
             if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
-                FinishPush(_currentEnemy, new Vector3(0, 3, 10));
+                FinishPush(_currentEnemy, new Vector3(0, 3, 4));
             else
                 FailPush();
 
