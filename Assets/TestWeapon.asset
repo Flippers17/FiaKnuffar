@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f62f709b073f44ba6767b73ccbfc45, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  knockForce: 0
-  areaOfEffect: {x: 0, y: 0, z: 0}
+  knockForce: 0.5
+  areaOfEffect: {x: 1, y: 1, z: 1}
