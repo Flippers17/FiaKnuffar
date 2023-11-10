@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public void OnInteractableObjectFound(IInteractable interactable)
+    public void OnInteractObject(Transform itemTrans)
     {
 
     }

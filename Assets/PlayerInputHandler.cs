@@ -10,7 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInput _input;
 
     public UnityAction<Vector2> OnMove;
-    
+    public UnityAction OnInteract;
 
     public bool rememberJumpInput = false;
     [SerializeField]
@@ -21,14 +21,25 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _input.actions["Move"].performed += OnMoveInput;
         _input.actions["Move"].canceled += OnMoveInput;
+
         _input.actions["Jump"].performed += OnJumpInput;
+
+        _input.actions["Interact"].performed += OnInteractInput;
     }
 
     private void OnDisable()
     {
         _input.actions["Move"].performed -= OnMoveInput;
         _input.actions["Move"].canceled -= OnMoveInput;
+
         _input.actions["Jump"].performed -= OnJumpInput;
+
+        _input.actions["Interact"].performed -= OnInteractInput;
+    }
+
+    private void OnInteractInput(InputAction.CallbackContext ctx)
+    {
+        OnInteract?.Invoke();
     }
 
     private void OnMoveInput(InputAction.CallbackContext ctx)
