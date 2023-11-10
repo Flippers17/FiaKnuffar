@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Rigidbody _rb;
 
     private Vector3 _fallPosition;
+    private bool _pushed = false;
     
 
     // Start is called before the first frame update
@@ -21,23 +22,28 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
 
-    public void GetPushed(Vector2 pushVelocity)
+    public void GetPushed(Vector3 pushVelocity)
     {
+        if (_pushed)
+            return;
+
+        _pushed = true;
         StartCoroutine(GettingPushed(pushVelocity));
 
     }
 
-    IEnumerator GettingPushed(Vector2 pushVelocity)
+    IEnumerator GettingPushed(Vector3 pushVelocity)
     {
         float moveSpeed = pushVelocity.magnitude;
 
         Vector3 moveDir = _fallPosition - transform.position;
         moveDir.Normalize();
 
-        while (Vector3.Distance(transform.position, _fallPosition) < 0.1f)
+        while (Vector3.Distance(transform.position, _fallPosition) > 0.1f)
         {
             Vector3 moveDif = moveSpeed * moveDir * Time.deltaTime;
 
+            Debug.Log("Hej");
             if (Vector3.Distance(transform.position, _fallPosition) < moveDif.magnitude)
             {
                 transform.position = _fallPosition;
@@ -48,7 +54,9 @@ public class EnemyBehaviour : MonoBehaviour
             yield return null;
         }
 
-        _rb.velocity = new Vector3(pushVelocity.x, 2, pushVelocity.y);
+        pushVelocity = transform.forward * pushVelocity.z + pushVelocity.x * transform.right + transform.up * pushVelocity.y;
+
+        _rb.velocity = pushVelocity;
         _rb.isKinematic = false;
     }
 }

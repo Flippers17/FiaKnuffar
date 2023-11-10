@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInput _input;
 
     public UnityAction<Vector2> OnMove;
+    public UnityAction OnPush;
     public UnityAction OnInteract;
 
     public bool rememberJumpInput = false;
@@ -23,6 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
         _input.actions["Move"].canceled += OnMoveInput;
 
         _input.actions["Jump"].performed += OnJumpInput;
+        _input.actions["Push"].performed += OnPushInput;
 
         _input.actions["Interact"].performed += OnInteractInput;
     }
@@ -33,6 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
         _input.actions["Move"].canceled -= OnMoveInput;
 
         _input.actions["Jump"].performed -= OnJumpInput;
+        _input.actions["Push"].performed -= OnPushInput;
 
         _input.actions["Interact"].performed -= OnInteractInput;
     }
@@ -45,6 +48,11 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnMoveInput(InputAction.CallbackContext ctx)
     {
         OnMove?.Invoke(ctx.ReadValue<Vector2>());
+    }
+    
+    private void OnPushInput(InputAction.CallbackContext ctx)
+    {
+        OnPush?.Invoke();
     }
     
     private void OnJumpInput(InputAction.CallbackContext ctx)
