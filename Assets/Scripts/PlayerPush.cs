@@ -23,6 +23,9 @@ public class PlayerPush : MonoBehaviour
     [SerializeField]
     private GameObject _quickTimeEventUI;
 
+    [SerializeField]
+    private PlayerCameraPosition camPos;
+
     [Range(1, 100)]
     private float quickTimeValue = 1;
     private int quickTimeDirection = 1;
@@ -76,6 +79,7 @@ public class PlayerPush : MonoBehaviour
 
     private void InitiatePush(EnemyBehaviour enemy)
     {
+        camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
         quickTimeSpeed = enemy.quickTimeSpeed;
         doingPush = true;
@@ -89,11 +93,20 @@ public class PlayerPush : MonoBehaviour
     {
         _quickTimeEventUI.SetActive(false);
         enemy.GetPushed(pushVelocity);
+        StartCoroutine(PushBeingFinnished());
+        
+    }
+
+    IEnumerator PushBeingFinnished()
+    {
+        yield return new WaitForSeconds(1);
+        camPos.SetZoom(false);
         doingPush = false;
     }
 
     private void FailPush()
     {
+        camPos.SetZoom(false);
         _quickTimeEventUI.SetActive(false);
         doingPush = false;
     }
