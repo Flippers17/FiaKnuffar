@@ -12,7 +12,7 @@ public class ProceduralWall : MonoBehaviour
     [SerializeField]
     private Vector2 _size = Vector2.one;
     [SerializeField]
-    private Vector2 _segmentSize = Vector2.one;
+    private Vector3 _segmentSize = Vector3.one;
 
     [SerializeField]
     private bool invertedLeft;
@@ -38,10 +38,10 @@ public class ProceduralWall : MonoBehaviour
                     }
                     else if (x == _size.x - 1)
                     {
-                        if (!invertedRight)
-                            SpawnWall(wallSet.topCorner, new Vector2(x, y), 90);
-                        else
-                            SpawnWall(wallSet.topInvertedCorner, new Vector2(x, y), 90);
+                        //if (!invertedRight)
+                        //    SpawnWall(wallSet.topCorner, new Vector3(x, y, -1), 90);
+                        //else
+                        //    SpawnWall(wallSet.topInvertedCorner, new Vector3(x, y, -1), -90);
                     }
                     else
                         SpawnWall(wallSet.topWall, new Vector2(x, y), 0);
@@ -58,10 +58,10 @@ public class ProceduralWall : MonoBehaviour
                     }
                     else if (x == _size.x - 1)
                     {
-                        if (!invertedRight)
-                            SpawnWall(wallSet.corner, new Vector2(x, y), 90);
-                        else
-                            SpawnWall(wallSet.invertedCorner, new Vector2(x, y), 90);
+                        //if (!invertedRight)
+                        //    SpawnWall(wallSet.corner, new Vector3(x, y, -1), 90);
+                        //else
+                        //    SpawnWall(wallSet.invertedCorner, new Vector3(x, y, -1), -90);
                     }
                     else
                         SpawnWall(wallSet.wall, new Vector2(x, y), 0);
@@ -70,10 +70,10 @@ public class ProceduralWall : MonoBehaviour
         }
     }
 
-    private void SpawnWall(GameObject wall, Vector2 position, float angle)
+    private void SpawnWall(GameObject wall, Vector3 position, float angle)
     {
         GameObject current = Instantiate(wall, transform);
-        current.transform.localPosition = new Vector2(position.x * _segmentSize.x, position.y * _segmentSize.y);
+        current.transform.localPosition = new Vector3(position.x * _segmentSize.x, position.y * _segmentSize.y, position.z * _segmentSize.z);
         current.transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 
