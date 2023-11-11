@@ -66,13 +66,21 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
-        _anim.SetBool("Grounded", isGrounded);
+        
         HandleGravity();
     }
 
     private bool IsGrounded()
     {
-        return Physics.CheckSphere(_groundCheck.position, _groundCheckRadius, _groundLayers);
+        if(Physics.CheckSphere(_groundCheck.position, _groundCheckRadius, _groundLayers))
+        {
+            _anim.ResetTrigger("Jump");
+            _anim.SetBool("Grounded", true);
+            return true;
+        }
+
+        _anim.SetBool("Grounded", false);
+        return false;
     }
 
     private void Jump()
