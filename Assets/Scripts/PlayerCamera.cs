@@ -18,7 +18,7 @@ public class PlayerCamera : MonoBehaviour
     public void SetCameraFollow(bool shouldCameraFollow) => _followObject = shouldCameraFollow;
     public void SetZoom(bool isZoomed) => _zoomedIn = isZoomed;
 
-    public void SetCamRotation(float angle)
+    public void SetCameraRotation(float angle)
     {
         _playerFollowObj.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
