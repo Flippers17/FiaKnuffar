@@ -22,7 +22,7 @@ public class DestroyAfterSeconds : MonoBehaviour
 
     private IEnumerator PlayHitSound()
     {
-        yield return new WaitForSeconds(destroyTime - 0.5f);
+        yield return new WaitForSeconds(destroyTime - 0.8f);
         HitSoundManager.Instance.PlayRandomHitSounds();
     }
 }
