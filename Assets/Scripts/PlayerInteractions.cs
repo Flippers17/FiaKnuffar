@@ -62,6 +62,10 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (_currentHeldObject)
         {
+            Vector3 distance = transform.position + transform.forward * _dropDistance;
+
+            _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
+
             _currentHeldObject.ThrowItem(transform.forward, _throwForce);
             _currentHeldObject = null;
         }
