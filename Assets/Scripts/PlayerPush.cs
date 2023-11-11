@@ -252,7 +252,8 @@ public class PlayerPush : MonoBehaviour
         
         yield return new WaitForSeconds(.6f);
 
-        _currentEnemy.GetPushed(new Vector3(0,0,fallSpeed));
+        if(_currentEnemy)
+            _currentEnemy.GetPushed(new Vector3(0,0,fallSpeed));
 
         while (Vector3.Distance(transform.position, fallPos) > 0.1f)
         {
