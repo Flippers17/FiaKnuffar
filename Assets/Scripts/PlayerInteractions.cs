@@ -8,6 +8,8 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private LayerMask _interactiveLayer;
     [SerializeField] private PlayerInputHandler _input;
     [SerializeField] private Transform weaponHolder;
+    [SerializeField] private float _throwForce = 10;
+    [SerializeField] private float _dropDistance = 1.5f;
 
     public WeaponDataSO currentWeaponData => _currentHeldObject.weaponData;
 
@@ -18,12 +20,14 @@ public class PlayerInteractions : MonoBehaviour
     {
         _input.OnInteract += Interact;
         _input.OnDrop += DropItem;
+        _input.OnThrow += ThrowItem;
     }
 
     private void OnDisable()
     {
         _input.OnInteract -= Interact;
         _input.OnDrop -= DropItem;
+        _input.OnThrow -= ThrowItem;
     }
 
     private void Interact()
@@ -45,10 +49,22 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    private void ThrowItem()
+    {
+        if (_currentHeldObject)
+        {
+            _currentHeldObject.ThrowItem(transform.forward, _throwForce);
+            _currentHeldObject = null;
+        }
+    }
+
     private void DropItem()
     {
         if (_currentHeldObject)
         {
+            Vector3 distance = transform.position + transform.forward * _dropDistance;
+
+            _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
             _currentHeldObject.DropItem();
             _currentHeldObject = null;
         }
