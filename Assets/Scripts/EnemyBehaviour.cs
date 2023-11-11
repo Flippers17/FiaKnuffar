@@ -1,25 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _fallPoint;
-    [SerializeField]
-    private Rigidbody _rb;
+    [SerializeField] private Transform _fallPoint;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private RandomAudioPlayer _audio;
 
-    [HideInInspector]
-    public Vector3 _fallPosition;
+    [HideInInspector] public Vector3 _fallPosition;
     private bool _pushed = false;
 
     public int defense = 1;
     public float quickTimeSpeed = 50;
     public Vector2Int greenZone = new Vector2Int (40, 60);
 
-    public UnityEvent OnFall;
+    public UnityEvent<EnemyBehaviour> OnFall;
     
 
     // Start is called before the first frame update
@@ -35,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (_pushed)
             return;
 
+        _audio.PlayRandomSound();
         _pushed = true;
         StartCoroutine(GettingPushed(pushVelocity));
 
@@ -65,6 +62,6 @@ public class EnemyBehaviour : MonoBehaviour
 
         _rb.velocity = pushVelocity;
         _rb.isKinematic = false;
-        OnFall?.Invoke();
+        OnFall?.Invoke(this);
     }
 }
