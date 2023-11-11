@@ -119,7 +119,7 @@ MonoBehaviour:
   _rb: {fileID: 3392337094220003575}
   _audio: {fileID: 5224175246460981100}
   _fallPosition: {x: 0, y: 0, z: 0}
-  defense: 1
+  defense: 2
   quickTimeSpeed: 50
   greenZone: {x: 40, y: 60}
   OnFall:
