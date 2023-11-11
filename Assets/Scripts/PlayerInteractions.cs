@@ -11,6 +11,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private float _throwForce = 10;
     [SerializeField] private float _dropDistance = 1.5f;
     [SerializeField] private Animator _anim;
+    private PlayerPush playerPush;
 
     public WeaponDataSO currentWeaponData
     {
@@ -28,6 +29,7 @@ public class PlayerInteractions : MonoBehaviour
 
     private void OnEnable()
     {
+        playerPush = GetComponent<PlayerPush>();
         _input.OnInteract += Interact;
         _input.OnDrop += DropItem;
         _input.OnThrow += ThrowItem;
@@ -61,8 +63,12 @@ public class PlayerInteractions : MonoBehaviour
 
     private void ThrowItem()
     {
+        if (playerPush.GetPushState())
+            return;
+
         if (_currentHeldObject)
         {
+            _currentHeldObject.OnDie -= OnWeaponDie;
             Vector3 distance = transform.position + transform.forward * _dropDistance;
             _anim.SetBool("HasWeapon", false);
             _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
@@ -74,8 +80,12 @@ public class PlayerInteractions : MonoBehaviour
 
     private void DropItem()
     {
+        if (playerPush.GetPushState())
+            return;
+
         if (_currentHeldObject)
         {
+            _currentHeldObject.OnDie -= OnWeaponDie;
             Vector3 distance = transform.position + transform.forward * _dropDistance;
             _anim.SetBool("HasWeapon", false);
             _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
@@ -89,10 +99,22 @@ public class PlayerInteractions : MonoBehaviour
         _currentHeldObject.transform.parent = weaponHolder;
         _currentHeldObject.transform.localPosition = Vector3.zero;
         _currentHeldObject.transform.rotation = Quaternion.identity;
+        _currentHeldObject.OnDie += OnWeaponDie;
 
         _anim.SetBool("HasWeapon", true);
 
         _currentHeldObject.Interact();
+        _currentClosestInteractable = null;
+    }
+
+    public void ReduceCurrentWeaponDurabillity()
+    {
+        _currentHeldObject.ReduceDurabillity();
+    }
+
+    private void OnWeaponDie()
+    {
+        Destroy(_currentHeldObject.gameObject);
     }
 
     private void OnDrawGizmos()
@@ -124,7 +146,7 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
 
-            if(closestInteractable != _currentClosestInteractable)
+            if(closestInteractable != _currentClosestInteractable && closestInteractable != _currentHeldObject)
             {
                 if(_currentClosestInteractable)
                     _currentClosestInteractable.OutOfRange();

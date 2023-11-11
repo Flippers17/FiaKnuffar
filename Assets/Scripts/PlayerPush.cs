@@ -201,7 +201,10 @@ public class PlayerPush : MonoBehaviour
         Vector3 newPushVelocity = _pushVelocity;
 
         if (_interactions.currentWeaponData != null)
+        {
             newPushVelocity *= _interactions.currentWeaponData.pushVelocity;
+            _interactions.ReduceCurrentWeaponDurabillity();
+        }
         CameraShake.TriggerShake(.1f, .05f, .9f);
         _currentEnemy.GetPushed(newPushVelocity);
     }
