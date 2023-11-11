@@ -16,6 +16,13 @@ public class DestroyAfterSeconds : MonoBehaviour
 
     public void StartDestroy()
     {
+        StartCoroutine(PlayHitSound());
         Destroy(gameObject, destroyTime);
+    }
+
+    private IEnumerator PlayHitSound()
+    {
+        yield return new WaitForSeconds(destroyTime - 0.5f);
+        HitSoundManager.Instance.PlayRandomHitSounds();
     }
 }
