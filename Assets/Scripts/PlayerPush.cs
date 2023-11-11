@@ -111,8 +111,6 @@ public class PlayerPush : MonoBehaviour
                 _updateQuickTimeValueEvent.Invoke(quickTimeValue);
                 if(quickTimeValue >= 100)
                     FinishPush();
-                else if(quickTimeValue <= 1)
-                    FailPush();
             }
 
         }
@@ -284,5 +282,10 @@ public class PlayerPush : MonoBehaviour
     {
         quickTimeValue -= Time.deltaTime * quickTimeSpeed;
         _updateQuickTimeValueEvent.Invoke(quickTimeValue);
+        if (quickTimeValue <= 1)
+        {
+            FailPush();
+            quickTimeValue = 20;
+        }
     }
 }
