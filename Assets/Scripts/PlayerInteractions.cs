@@ -11,7 +11,16 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private float _throwForce = 10;
     [SerializeField] private float _dropDistance = 1.5f;
 
-    public WeaponDataSO currentWeaponData => _currentHeldObject.weaponData;
+    public WeaponDataSO currentWeaponData
+    {
+        get
+        {
+            if (_currentHeldObject == null)
+                return null;
+
+            return _currentHeldObject.weaponData;
+        }
+    }
 
     private InteractableObject _currentClosestInteractable;
     private InteractableObject _currentHeldObject;

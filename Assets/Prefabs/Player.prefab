@@ -393,13 +393,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   halfBoxSize: {x: 1, y: 1, z: 1}
+  fallSpeed: 8
   _input: {fileID: 4904071439811853370}
-  _updateQuickTimeValueEvent: {fileID: 11400000, guid: 0c315819a891b9d4db0124d3c88b008f,
-    type: 2}
-  _setGreenZoneEvent: {fileID: 11400000, guid: 5cb41f63fc82ca84988f1ad19c564156, type: 2}
+  _interactions: {fileID: 6303257942190081103}
   _quickTimeEventUI: {fileID: 0}
   camPos: {fileID: 9182876712576077348}
   _health: {fileID: 9201651143054584679}
+  _updateQuickTimeValueEvent: {fileID: 11400000, guid: 0c315819a891b9d4db0124d3c88b008f,
+    type: 2}
+  _setGreenZoneEvent: {fileID: 11400000, guid: 5cb41f63fc82ca84988f1ad19c564156, type: 2}
 --- !u!114 &6303257942190081103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +421,8 @@ MonoBehaviour:
     m_Bits: 128
   _input: {fileID: 4904071439811853370}
   weaponHolder: {fileID: 1820713121603941246}
+  _throwForce: 10
+  _dropDistance: 1.5
 --- !u!114 &9182876712576077348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b22320a6dd1db48979da6367331e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   OnDie:
     m_PersistentCalls:
       m_Calls:
