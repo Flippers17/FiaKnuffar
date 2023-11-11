@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 726065026927918422}
   - component: {fileID: 726065026927918414}
   - component: {fileID: 726065026927918413}
-  - component: {fileID: 445860317510360152}
+  - component: {fileID: 29718168106954939}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -113,7 +113,7 @@ AudioSource:
   m_GameObject: {fileID: 726065026927918421}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 3a529bc676b60bf46b5f933351a2db0a,
+  OutputAudioMixerGroup: {fileID: -3379887650446060704, guid: c16f756b1565be248902f786478639ea,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -227,8 +227,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 892cfd9147eba8f488acfe7d8b999534, type: 3}
   - {fileID: 8300000, guid: 54512293a7e290c449ae62d3f1708ac4, type: 3}
   - {fileID: 8300000, guid: d18459774987de84f9a0d7c328409e83, type: 3}
---- !u!136 &445860317510360152
-CapsuleCollider:
+--- !u!65 &29718168106954939
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,9 +237,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &726065028660163038
 GameObject:
@@ -374,3 +373,23 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 726065028619623221}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8215485430943186126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8651630608079333371, guid: 97074e1aef39f6d47867081b9c93862c,
+    type: 3}
+  m_PrefabInstance: {fileID: 726065028619623221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &5709363232391095239
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215485430943186126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.005
+  m_Height: 0.02
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
