@@ -435,8 +435,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fefb95800228c74a99ca7cbb2e872d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFollowObj: {fileID: 0}
-  _camFollow: {fileID: 0}
+  _playerFollowObj: {fileID: 0}
+  _camHolder: {fileID: 0}
+  _playerPos: {fileID: 0}
+  _zoomedPos: {fileID: 1988484836211108736}
+  _lerpSpeed: 3
+  _slerpSpeed: 3
+  _zoomedIn: 0
 --- !u!114 &9201651143054584679
 MonoBehaviour:
   m_ObjectHideFlags: 0

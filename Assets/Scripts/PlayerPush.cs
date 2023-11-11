@@ -23,7 +23,7 @@ public class PlayerPush : MonoBehaviour
     [SerializeField]
     private GameObject _quickTimeEventUI;
     [SerializeField]
-    private PlayerCameraPosition camPos;
+    private PlayerCamera camPos;
     [SerializeField]
     private PlayerHealth _health;
 
@@ -152,7 +152,7 @@ public class PlayerPush : MonoBehaviour
 
     public void Fall()
     {
-        camPos._camFollow.enabled = false;
+        camPos.SetCameraFollow(false);
         _quickTimeEventUI.SetActive(false);
         _falling = true;
         GetComponent<CharacterController>().enabled = false;
