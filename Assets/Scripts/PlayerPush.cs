@@ -97,6 +97,18 @@ public class PlayerPush : MonoBehaviour
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
 
+        doingPush = true;
+        _currentEnemy = enemy;
+
+        CharacterController character = GetComponent<CharacterController>();
+        character.enabled = false;
+
+        Vector3 playerPos = _currentEnemy.transform.position - _currentEnemy.transform.forward;
+        transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
+        transform.rotation = Quaternion.LookRotation(_currentEnemy.transform.forward, Vector3.up);
+
+        character.enabled = true;
+
         quickTimeSpeed = enemy.quickTimeSpeed;
         _currentGreenZone.Item1 = enemy.greenZone.x;
         _currentGreenZone.Item2 = enemy.greenZone.y;
@@ -114,10 +126,8 @@ public class PlayerPush : MonoBehaviour
         _currentGreenZone.Item1 = Mathf.Max(0, _currentGreenZone.Item1);
         _currentGreenZone.Item2 = Mathf.Min(100, _currentGreenZone.Item2);
 
-        doingPush = true;
         quickTimeValue = 1;
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
-        _currentEnemy = enemy;
     }
 
 
