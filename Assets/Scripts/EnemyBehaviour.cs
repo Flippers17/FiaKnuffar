@@ -40,6 +40,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator GettingPushed(Vector3 pushVelocity)
     {
+        _anim.SetTrigger("Fall");
+
         float moveSpeed = pushVelocity.magnitude;
 
         Vector3 moveDir = _fallPosition - transform.position;
