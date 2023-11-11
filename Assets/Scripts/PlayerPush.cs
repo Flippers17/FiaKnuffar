@@ -100,7 +100,6 @@ public class PlayerPush : MonoBehaviour
         {
             if(_currentQuickTimeType == QuickTimeType.timing)
             {
-                Debug.Log("Here");
                 if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
                     FinishPush();
                 else
