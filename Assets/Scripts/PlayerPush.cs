@@ -15,6 +15,7 @@ public class PlayerPush : MonoBehaviour
     private Vector3 halfBoxSize = new Vector3 (1f, 1f, 1f);
     [SerializeField]
     private float fallSpeed = 8f;
+    [SerializeField] private Vector3 _pushVelocity = new Vector3(0, 3, 4);
 
     [Space(20), SerializeField]
     private PlayerInputHandler _input;
@@ -84,7 +85,7 @@ public class PlayerPush : MonoBehaviour
         else
         {
             if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
-                FinishPush(_currentEnemy, new Vector3(0, 3, 4));
+                FinishPush();
             else
                 FailPush();
 
@@ -120,21 +121,28 @@ public class PlayerPush : MonoBehaviour
     }
 
 
-    private void FinishPush(EnemyBehaviour enemy, Vector3 pushVelocity)
+    private void FinishPush()
     {
-        if(_interactions.currentWeaponData != null)
-            pushVelocity *= _interactions.currentWeaponData.pushVelocity;
-
         _anim.SetTrigger("Push");
         _quickTimeEventUI.SetActive(false);
-        enemy.GetPushed(pushVelocity);
         StartCoroutine(PushBeingFinnished());
         
     }
 
+    //Plays when push event happens
+    public void PushEnemy()
+    {
+        Vector3 newPushVelocity = _pushVelocity;
+
+        if (_interactions.currentWeaponData != null)
+            newPushVelocity *= _interactions.currentWeaponData.pushVelocity;
+
+        _currentEnemy.GetPushed(newPushVelocity);
+    }
+
     IEnumerator PushBeingFinnished()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         camPos.SetZoom(false);
         doingPush = false;
     }

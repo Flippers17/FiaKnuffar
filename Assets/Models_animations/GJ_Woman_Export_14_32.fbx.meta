@@ -421,9 +421,10 @@ ModelImporter:
       curves: []
       events:
       - time: 0.31262523
-        functionName: PushEvent
+        functionName: PushEnemy
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: 143ce437e6c485a47975cb70e61bd969,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
