@@ -120,6 +120,7 @@ public class PlayerPush : MonoBehaviour
     {
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
+        _health.ResetHealth();
 
         finishingPush = false;
         doingPush = true;
@@ -234,6 +235,9 @@ public class PlayerPush : MonoBehaviour
 
     public void Fall()
     {
+        if (_falling)
+            return;
+
         camPos.SetCameraFollow(false);
         _quickTimeEventUI.SetActive(false);
         GetComponent<CharacterController>().enabled = false;

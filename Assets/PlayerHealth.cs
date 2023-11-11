@@ -8,6 +8,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private int health = 3;
     [SerializeField] private Animator _animator;
+    [SerializeField]
+    private IntEventPort _updateHealthEvent;
+
     public UnityEvent OnDie;
     public UnityEvent OnDamageTaken;
 
@@ -15,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         OnDamageTaken?.Invoke();
-
+        _updateHealthEvent.Invoke(health);
         if(health <= 0)
         {
             OnDie?.Invoke();
@@ -26,5 +29,11 @@ public class PlayerHealth : MonoBehaviour
     public int GetHealth()
     {
         return health;
+    }
+
+    public void ResetHealth()
+    {
+        health = 3;
+        _updateHealthEvent.Invoke(health);
     }
 }
