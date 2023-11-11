@@ -16,13 +16,15 @@ public class PlayerMovement : MonoBehaviour
     [Space(10), SerializeField]
     private PlayerInputHandler _input;
     [SerializeField]
+    private PlayerPush _playerPush;
+    [SerializeField]
     private float _jumpVelocity = 10f;
     [SerializeField]
     private float _moveSpeed = 6f;
     [SerializeField]
     private float _gravity = 40f;
 
-    private Vector3 _velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
 
 
     public bool isGrounded = false;
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 facingDir = new Vector3(0, 0, 1);
     [SerializeField]
     private float _turnSpeed = 0.5f;
+
 
     private void Awake()
     {
@@ -71,19 +74,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        _velocity.y = _jumpVelocity;
+        velocity.y = _jumpVelocity;
     }
 
     private void HandleMovement(Vector2 moveInput)
     {
+        if (_playerPush.GetPushState())
+        {
+            velocity.x = 0;
+            velocity.z = 0;
+            return;
+        }
+
         moveInput = new Vector2(camTransform.forward.x, camTransform.forward.z) * moveInput.y + new Vector2(camTransform.right.x, camTransform.right.z) * moveInput.x;
         moveInput.Normalize();
 
         if (moveInput.magnitude != 0)
             facingDir = new Vector3(moveInput.x, 0, moveInput.y);
         
-        _velocity.x = moveInput.x * _moveSpeed;
-        _velocity.z = moveInput.y * _moveSpeed;
+        velocity.x = moveInput.x * _moveSpeed;
+        velocity.z = moveInput.y * _moveSpeed;
     }
 
     private void HandleRotation()
@@ -93,11 +103,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGravity()
     {
-        _velocity.y -= _gravity * Time.fixedDeltaTime;
+        if(!isGrounded)
+           velocity.y -= _gravity * Time.fixedDeltaTime;
+        else
+            velocity.y = -1;
     }
 
     private void HandleVelocity()
     {
-        _controller.Move(_velocity * Time.deltaTime);
+        if(_controller.enabled)
+            _controller.Move(velocity * Time.deltaTime);
     }
 }

@@ -190,6 +190,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.y
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2d3810552db0b74295e6884650d4622, type: 3}
 --- !u!1001 &513623403
@@ -258,6 +268,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.y
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2d3810552db0b74295e6884650d4622, type: 3}
@@ -442,6 +462,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392337094220003578, guid: f2d3810552db0b74295e6884650d4622,
+        type: 3}
+      propertyPath: greenZone.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2d3810552db0b74295e6884650d4622, type: 3}

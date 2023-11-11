@@ -11,11 +11,13 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
-    private Vector3 _fallPosition;
+    [HideInInspector]
+    public Vector3 _fallPosition;
     private bool _pushed = false;
 
     public int defense = 1;
     public float quickTimeSpeed = 50;
+    public Vector2Int greenZone = new Vector2Int (40, 60);
 
     public UnityEvent OnFall;
     

@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 4904071439811853369}
   - component: {fileID: 6303257942190081103}
   - component: {fileID: 9182876712576077348}
+  - component: {fileID: 9201651143054584679}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -322,9 +323,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _input: {fileID: 4904071439811853370}
+  _playerPush: {fileID: 4904071439811853369}
   _jumpVelocity: 10
   _moveSpeed: 6
   _gravity: 40
+  velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
   _turnSpeed: 0.1
 --- !u!114 &4904071439811853370
@@ -396,6 +399,7 @@ MonoBehaviour:
   _setGreenZoneEvent: {fileID: 11400000, guid: 5cb41f63fc82ca84988f1ad19c564156, type: 2}
   _quickTimeEventUI: {fileID: 0}
   camPos: {fileID: 9182876712576077348}
+  _health: {fileID: 9201651143054584679}
 --- !u!114 &6303257942190081103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +433,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFollowObj: {fileID: 0}
   _camFollow: {fileID: 0}
+--- !u!114 &9201651143054584679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4904071439811853361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b22320a6dd1db48979da6367331e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4904071439811853369}
+        m_TargetAssemblyTypeName: PlayerPush, Assembly-CSharp
+        m_MethodName: Fall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8335669902991004688
 GameObject:
   m_ObjectHideFlags: 0

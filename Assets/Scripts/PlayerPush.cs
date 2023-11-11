@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerPush : MonoBehaviour
@@ -12,19 +13,24 @@ public class PlayerPush : MonoBehaviour
     
     [SerializeField]
     private Vector3 halfBoxSize = new Vector3 (1f, 1f, 1f);
-
     [SerializeField]
+    private float fallSpeed = 8f;
+
+    [Space(20), SerializeField]
     private PlayerInputHandler _input;
     [SerializeField]
+    private GameObject _quickTimeEventUI;
+    [SerializeField]
+    private PlayerCameraPosition camPos;
+    [SerializeField]
+    private PlayerHealth _health;
+
+    
+    [Space(10), SerializeField]
     private FloatEventPort _updateQuickTimeValueEvent;
     [SerializeField]
     private TwoIntEventPort _setGreenZoneEvent;
 
-    [SerializeField]
-    private GameObject _quickTimeEventUI;
-
-    [SerializeField]
-    private PlayerCameraPosition camPos;
 
     [Range(1, 100)]
     private float quickTimeValue = 1;
@@ -33,6 +39,7 @@ public class PlayerPush : MonoBehaviour
     private (int, int) _currentGreenZone = (40, 60);
     private EnemyBehaviour _currentEnemy;
     private bool doingPush = false;
+    private bool _falling = false;
 
 
     private void OnEnable()
@@ -47,7 +54,7 @@ public class PlayerPush : MonoBehaviour
 
     private void Update()
     {
-        if (doingPush)
+        if (doingPush && !_falling)
         {
             quickTimeValue += quickTimeDirection *Time.deltaTime * quickTimeSpeed;
             _updateQuickTimeValueEvent.Invoke(quickTimeValue);
@@ -59,6 +66,9 @@ public class PlayerPush : MonoBehaviour
 
     private void TryPush()
     {
+        if (_falling)
+            return;
+
         if (!doingPush)
         {
             Collider[] enemies = Physics.OverlapBox(_pushPoint.position, halfBoxSize, Quaternion.identity, _enemyLayers);
@@ -82,6 +92,8 @@ public class PlayerPush : MonoBehaviour
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
         quickTimeSpeed = enemy.quickTimeSpeed;
+        _currentGreenZone.Item1 = enemy.greenZone.x;
+        _currentGreenZone.Item2 = enemy.greenZone.y;
         doingPush = true;
         quickTimeValue = 1;
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
@@ -106,8 +118,46 @@ public class PlayerPush : MonoBehaviour
 
     private void FailPush()
     {
-        camPos.SetZoom(false);
+        _health.TakeDamage(1);
+        //camPos.SetZoom(false);
+        //_quickTimeEventUI.SetActive(false);
+        //doingPush = false;
+    }
+
+    public bool GetPushState()
+    {
+        return doingPush;
+    }
+
+
+    public void Fall()
+    {
+        camPos._camFollow.enabled = false;
         _quickTimeEventUI.SetActive(false);
-        doingPush = false;
+        _falling = true;
+        GetComponent<CharacterController>().enabled = false;
+        StartCoroutine(Falling(_currentEnemy._fallPosition));
+    }
+
+    private IEnumerator Falling(Vector3 fallPos)
+    {
+        Vector3 moveDir = fallPos - transform.position;
+        moveDir.Normalize();
+
+        while (Vector3.Distance(transform.position, fallPos) > 0.1f)
+        {
+            Vector3 moveDif = fallSpeed * moveDir * Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, fallPos) < moveDif.magnitude)
+            {
+                transform.position = fallPos;
+                break;
+            }
+
+            transform.position += moveDif;
+            yield return null;
+        }
+        GetComponent<CharacterController>().enabled = true;
+        GetComponent<PlayerMovement>().velocity = transform.forward * fallSpeed + transform.up * 1;
     }
 }

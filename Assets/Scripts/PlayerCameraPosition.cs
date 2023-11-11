@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCameraPosition : MonoBehaviour
 {
     [SerializeField] private Transform playerFollowObj;
-    [SerializeField] private CameraFollow _camFollow;
+    public CameraFollow _camFollow;
 
     public void SetZoom(bool isZoomed) => _camFollow.SetZoom(isZoomed);
 
