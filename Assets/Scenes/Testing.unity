@@ -86278,6 +86278,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177060562}
     m_Modifications:
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[0].type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[2].type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[1].greenZone.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[1].greenZone.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[2].greenZone.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[2].greenZone.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[0].quickTimeSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[1].quickTimeSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 726065026927918408, guid: 84de795159c265341afefaecf0bfe0d1,
+        type: 3}
+      propertyPath: quickTimeEvents.Array.data[2].quickTimeSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 726065026927918412, guid: 84de795159c265341afefaecf0bfe0d1,
         type: 3}
       propertyPath: m_RootOrder

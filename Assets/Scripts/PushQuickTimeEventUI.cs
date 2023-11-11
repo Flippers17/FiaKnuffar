@@ -16,6 +16,10 @@ public class PushQuickTimeEventUI : MonoBehaviour
     [SerializeField]
     private Slider slider;
 
+    private int rectMod = 4;
+
+    public QuickTimeType quickTimeType;
+
     private void OnEnable()
     {
         _quickTimeValueUpdate.OnInvoked += UpdateValue;
@@ -30,18 +34,38 @@ public class PushQuickTimeEventUI : MonoBehaviour
 
     private void UpdateValue(float value)
     {
-        if (value > 100 || value < 1)
-            return;
+        if(quickTimeType == QuickTimeType.timing)
+        {
+            if (value > 100 || value < 1)
+                return;
 
-        slider.value = value;
+            slider.value = value;
+        }
+        else if(quickTimeType == QuickTimeType.mashing)
+        {
+            RectTransform thisRect = (RectTransform)transform;
+            _greenZone.sizeDelta = new Vector2(value * rectMod, thisRect.rect.height);
+            slider.value = value;
+        }
     }
     
     private void SetGreenZone(int low, int high)
     {
-        RectTransform thisRect = (RectTransform)transform;
+        if(quickTimeType == QuickTimeType.timing)
+        {
+            RectTransform thisRect = (RectTransform)transform;
 
-        int rectMod = (int)thisRect.rect.width / 100;
-        _greenZone.sizeDelta = new Vector2((high - low) * rectMod, thisRect.rect.height);
-        _greenZone.anchoredPosition = new Vector2(low * rectMod, 0);
+            rectMod = (int)thisRect.rect.width / 100;
+            _greenZone.sizeDelta = new Vector2((high - low) * rectMod, thisRect.rect.height);
+            _greenZone.anchoredPosition = new Vector2(low * rectMod, 0);
+        }
+        else if(quickTimeType == QuickTimeType.mashing)
+        {
+            RectTransform thisRect = (RectTransform)transform;
+
+            rectMod = (int)thisRect.rect.width / 100;
+            _greenZone.sizeDelta = new Vector2(0, thisRect.rect.height);
+            _greenZone.anchoredPosition = new Vector2(0, 0);
+        }
     }
 }
