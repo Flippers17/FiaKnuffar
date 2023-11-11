@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+[SelectionBase]
 public class ProceduralWall : MonoBehaviour
 {
     [SerializeField]
