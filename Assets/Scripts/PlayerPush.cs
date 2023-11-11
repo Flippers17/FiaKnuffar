@@ -87,7 +87,7 @@ public class PlayerPush : MonoBehaviour
     {
         if (_falling || timeSinceSwitched < inputDelay)
             return;
-
+        
         if (!doingPush)
         {
             Collider[] enemies = Physics.OverlapBox(_pushPoint.position, halfBoxSize, Quaternion.identity, _enemyLayers);
@@ -100,6 +100,7 @@ public class PlayerPush : MonoBehaviour
         {
             if(_currentQuickTimeType == QuickTimeType.timing)
             {
+                Debug.Log("Here");
                 if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
                     FinishPush();
                 else
@@ -121,11 +122,13 @@ public class PlayerPush : MonoBehaviour
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
 
+        finishingPush = false;
         doingPush = true;
         _currentEnemy = enemy;
 
         CharacterController character = GetComponent<CharacterController>();
         character.enabled = false;
+        timeSinceSwitched = 10;
 
         Vector3 playerPos = _currentEnemy.transform.position - _currentEnemy.transform.forward;
         transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
