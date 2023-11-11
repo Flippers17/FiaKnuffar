@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallSet: {fileID: 11400000, guid: 35137c0e12611a647839906f10e8a51c, type: 2}
-  _size: {x: 10, y: 0}
+  _size: {x: 9, y: 0}
   _segmentSize: {x: 2.8, y: 3.5, z: 3}
   invertedLeft: 0
   invertedRight: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallSet: {fileID: 11400000, guid: 35137c0e12611a647839906f10e8a51c, type: 2}
-  _size: {x: 10, y: 0}
+  _size: {x: 9, y: 0}
   _segmentSize: {x: 2.8, y: 3.5, z: 3}
   invertedLeft: 0
   invertedRight: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallSet: {fileID: 11400000, guid: 35137c0e12611a647839906f10e8a51c, type: 2}
-  _size: {x: 10, y: 0}
+  _size: {x: 9, y: 0}
   _segmentSize: {x: 2.8, y: 3.5, z: 3}
   invertedLeft: 0
   invertedRight: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallSet: {fileID: 11400000, guid: 35137c0e12611a647839906f10e8a51c, type: 2}
-  _size: {x: 10, y: 0}
+  _size: {x: 9, y: 0}
   _segmentSize: {x: 2.8, y: 3.5, z: 3}
   invertedLeft: 0
   invertedRight: 0
