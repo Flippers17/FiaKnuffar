@@ -12,6 +12,9 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] private Collider _col;
     [SerializeField] private GameObject _outlineGO;
     [SerializeField] private int throwAttack = 1;
+    [SerializeField] private int durabillity = 1;
+
+    public UnityAction OnDie;
 
     public WeaponDataSO weaponData => _weaponData;
 
@@ -51,6 +54,18 @@ public class InteractableObject : MonoBehaviour
         _col.enabled = true;
 
         transform.parent = null;
+    }
+
+    public void ReduceDurabillity()
+    {
+        durabillity--;
+        if (durabillity <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        OnDie?.Invoke();
     }
 
     private void OnCollisionEnter(Collision collision)
