@@ -1,0 +1,106 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
+
+public class ProceduralWall : MonoBehaviour
+{
+    [SerializeField]
+    private WallSet wallSet;
+
+    [SerializeField]
+    private Vector2 _size = Vector2.one;
+    [SerializeField]
+    private Vector2 _segmentSize = Vector2.one;
+
+    [SerializeField]
+    private bool invertedLeft;
+    [SerializeField]
+    private bool invertedRight;
+
+    internal void UpdateWall()
+    {
+        ClearWall();
+
+        for(int x = 0; x < _size.x; x++)
+        {
+            for(int y = 0; y < _size.y; y++)
+            {
+                if(y == _size.y - 1)
+                {
+                    if (x == 0)
+                    {
+                        if (!invertedLeft)
+                            SpawnWall(wallSet.topCorner, new Vector2(x, y), 0);
+                        else
+                            SpawnWall(wallSet.topInvertedCorner, new Vector2(x, y), 0);
+                    }
+                    else if (x == _size.x - 1)
+                    {
+                        if (!invertedRight)
+                            SpawnWall(wallSet.topCorner, new Vector2(x, y), 90);
+                        else
+                            SpawnWall(wallSet.topInvertedCorner, new Vector2(x, y), 90);
+                    }
+                    else
+                        SpawnWall(wallSet.topWall, new Vector2(x, y), 0);
+
+                }
+                else
+                {
+                    if (x == 0)
+                    {
+                        if (!invertedLeft)
+                            SpawnWall(wallSet.corner, new Vector2(x, y), 0);
+                        else
+                            SpawnWall(wallSet.invertedCorner, new Vector2(x, y), 0);
+                    }
+                    else if (x == _size.x - 1)
+                    {
+                        if (!invertedRight)
+                            SpawnWall(wallSet.corner, new Vector2(x, y), 90);
+                        else
+                            SpawnWall(wallSet.invertedCorner, new Vector2(x, y), 90);
+                    }
+                    else
+                        SpawnWall(wallSet.wall, new Vector2(x, y), 0);
+                }
+            }
+        }
+    }
+
+    private void SpawnWall(GameObject wall, Vector2 position, float angle)
+    {
+        GameObject current = Instantiate(wall, transform);
+        current.transform.localPosition = new Vector2(position.x * _segmentSize.x, position.y * _segmentSize.y);
+        current.transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+    }
+
+    private void ClearWall()
+    {
+        for(int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+
+            DestroyImmediate(child.gameObject);
+        }
+    }
+}
+
+
+[CustomEditor(typeof(ProceduralWall))]
+public class WallEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if(GUILayout.Button("Generate wall"))
+        {
+            ProceduralWall wall = (ProceduralWall)target;
+
+            wall.UpdateWall();
+        }
+    }
+}
