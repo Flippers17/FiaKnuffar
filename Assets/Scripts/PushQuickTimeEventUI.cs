@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,12 @@ public class PushQuickTimeEventUI : MonoBehaviour
     private RectTransform _greenZone;
 
     [SerializeField]
+    private IntEventPort _updateHealth;
+
+    [SerializeField]
+    private TextMeshProUGUI _healthText;
+
+    [SerializeField]
     private Slider slider;
 
     private int rectMod = 4;
@@ -24,12 +31,14 @@ public class PushQuickTimeEventUI : MonoBehaviour
     {
         _quickTimeValueUpdate.OnInvoked += UpdateValue;
         _setGreenZoneEvent.OnInvoked += SetGreenZone;
+        _updateHealth.OnInvoked += UpdateHealthText;
     }
 
     private void OnDisable()
     {
         _quickTimeValueUpdate.OnInvoked -= UpdateValue;
         _setGreenZoneEvent.OnInvoked -= SetGreenZone;
+        _updateHealth.OnInvoked -= UpdateHealthText;
     }
 
     private void UpdateValue(float value)
@@ -67,5 +76,10 @@ public class PushQuickTimeEventUI : MonoBehaviour
             _greenZone.sizeDelta = new Vector2(0, thisRect.rect.height);
             _greenZone.anchoredPosition = new Vector2(0, 0);
         }
+    }
+
+    private void UpdateHealthText(int value)
+    {
+        _healthText.text = value + "X";
     }
 }

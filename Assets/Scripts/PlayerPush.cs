@@ -120,6 +120,7 @@ public class PlayerPush : MonoBehaviour
     {
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
+        _health.ResetHealth();
 
         finishingPush = false;
         doingPush = true;
