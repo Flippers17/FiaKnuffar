@@ -326,8 +326,8 @@ MonoBehaviour:
   _input: {fileID: 4904071439811853370}
   _anim: {fileID: 7714760628673208862}
   _playerPush: {fileID: 4904071439811853369}
-  _jumpVelocity: 10
-  _moveSpeed: 6
+  _jumpVelocity: 16
+  _moveSpeed: 9
   _gravity: 40
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
