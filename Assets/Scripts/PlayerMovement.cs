@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [Space(10), SerializeField]
     private PlayerInputHandler _input;
     [SerializeField]
+    private Animator _anim;
+    [SerializeField]
     private PlayerPush _playerPush;
     [SerializeField]
     private float _jumpVelocity = 10f;
@@ -64,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
+        _anim.SetBool("Grounded", isGrounded);
         HandleGravity();
     }
 
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        _anim.SetTrigger("Jump");
         velocity.y = _jumpVelocity;
     }
 
@@ -83,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.x = 0;
             velocity.z = 0;
+            _anim.SetFloat("Speed", 0);
             return;
         }
 
@@ -94,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         
         velocity.x = moveInput.x * _moveSpeed;
         velocity.z = moveInput.y * _moveSpeed;
+        _anim.SetFloat("Speed", _moveSpeed * moveInput.magnitude);
     }
 
     private void HandleRotation()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[SelectionBase]
 public class InteractableObject : MonoBehaviour
 {
     public UnityAction OnInteract;

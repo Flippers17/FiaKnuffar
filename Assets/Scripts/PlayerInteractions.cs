@@ -10,6 +10,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private Transform weaponHolder;
     [SerializeField] private float _throwForce = 10;
     [SerializeField] private float _dropDistance = 1.5f;
+    [SerializeField] private Animator _anim;
 
     public WeaponDataSO currentWeaponData
     {
@@ -63,7 +64,7 @@ public class PlayerInteractions : MonoBehaviour
         if (_currentHeldObject)
         {
             Vector3 distance = transform.position + transform.forward * _dropDistance;
-
+            _anim.SetBool("HasWeapon", false);
             _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
 
             _currentHeldObject.ThrowItem(transform.forward, _throwForce);
@@ -76,7 +77,7 @@ public class PlayerInteractions : MonoBehaviour
         if (_currentHeldObject)
         {
             Vector3 distance = transform.position + transform.forward * _dropDistance;
-
+            _anim.SetBool("HasWeapon", false);
             _currentHeldObject.transform.position = new Vector3(distance.x, weaponHolder.position.y, distance.z);
             _currentHeldObject.DropItem();
             _currentHeldObject = null;
@@ -87,6 +88,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         _currentHeldObject.transform.parent = weaponHolder;
         _currentHeldObject.transform.localPosition = Vector3.zero;
+        _anim.SetBool("HasWeapon", true);
 
         _currentHeldObject.Interact();
     }
