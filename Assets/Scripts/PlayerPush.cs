@@ -234,6 +234,9 @@ public class PlayerPush : MonoBehaviour
 
     public void Fall()
     {
+        if (_falling)
+            return;
+
         camPos.SetCameraFollow(false);
         _quickTimeEventUI.SetActive(false);
         GetComponent<CharacterController>().enabled = false;
