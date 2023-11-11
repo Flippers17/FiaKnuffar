@@ -329,7 +329,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4542553
-        functionName: Push
+        functionName: PushEnemy
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
