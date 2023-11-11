@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Transform _fallPoint;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private RandomAudioPlayer _audio;
+    [SerializeField] private Animator _anim;
 
     [HideInInspector] public Vector3 _fallPosition;
     private bool _pushed = false;
