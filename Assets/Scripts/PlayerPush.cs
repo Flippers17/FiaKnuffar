@@ -63,8 +63,16 @@ public class PlayerPush : MonoBehaviour
         {
             quickTimeValue += quickTimeDirection *Time.deltaTime * quickTimeSpeed;
             _updateQuickTimeValueEvent.Invoke(quickTimeValue);
-            if (quickTimeValue <= 1 || quickTimeValue >= 100)
+            if (quickTimeValue <= 1)
+            {
                 quickTimeDirection *= -1;
+                quickTimeValue = 1;
+            }
+            else if(quickTimeValue >= 100)
+            {
+                quickTimeDirection *= -1;
+                quickTimeValue = 100;
+            }
         }
     }
 

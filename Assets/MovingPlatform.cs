@@ -30,4 +30,10 @@ public class MovingPlatform : MonoBehaviour
     {
         _isMoving = true;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(target.position, new Vector3(1, 1, 1));
+    }
 }
