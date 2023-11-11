@@ -10,8 +10,7 @@ public class ProceduralWall : MonoBehaviour
     [SerializeField]
     private WallSet wallSet;
 
-    [SerializeField]
-    private Vector2 _size = Vector2.one;
+    public Vector2 _size = Vector2.one;
     [SerializeField]
     private Vector3 _segmentSize = Vector3.one;
 
@@ -20,7 +19,7 @@ public class ProceduralWall : MonoBehaviour
     [SerializeField]
     private bool invertedRight;
 
-    internal void UpdateWall()
+    public void UpdateWall()
     {
         ClearWall();
 
@@ -75,10 +74,10 @@ public class ProceduralWall : MonoBehaviour
     {
         GameObject current = Instantiate(wall, transform);
         current.transform.localPosition = new Vector3(position.x * _segmentSize.x, position.y * _segmentSize.y, position.z * _segmentSize.z);
-        current.transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        current.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 
-    private void ClearWall()
+    public void ClearWall()
     {
         for(int i = transform.childCount - 1; i >= 0; i--)
         {

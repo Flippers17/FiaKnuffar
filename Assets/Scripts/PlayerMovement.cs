@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && _input.rememberJumpInput)
             Jump();
-
+        
         HandleRotation();
         HandleVelocity();
     }
@@ -115,7 +115,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleRotation()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), _turnSpeed);
+        if (!_playerPush.GetPushState())
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), _turnSpeed);
     }
 
     private void HandleGravity()
