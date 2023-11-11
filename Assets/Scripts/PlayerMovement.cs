@@ -85,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        if (_playerPush.GetPushState())
+        {
+            return;
+        }
+
         _anim.SetTrigger("Jump");
         velocity.y = _jumpVelocity;
     }
