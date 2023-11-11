@@ -11,8 +11,11 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Collider _col;
     [SerializeField] private GameObject _outlineGO;
+    [SerializeField] private int throwAttack = 1;
 
     public WeaponDataSO weaponData => _weaponData;
+
+    private bool isThrown = false;
 
     public void InRange()
     {
@@ -35,6 +38,7 @@ public class InteractableObject : MonoBehaviour
     {
         _rb.isKinematic = false;
         _col.enabled = true;
+        isThrown = true;
 
         _rb.AddForce(dir * throwForce, ForceMode.Impulse);
 
@@ -47,5 +51,21 @@ public class InteractableObject : MonoBehaviour
         _col.enabled = true;
 
         transform.parent = null;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!isThrown)
+            return;
+
+        if(collision.collider.gameObject.layer == 8)
+        {
+            EnemyBehaviour enemy = collision.collider.gameObject.GetComponent<EnemyBehaviour>();
+
+            if (enemy.quickTimeEvents.Count > throwAttack)
+                return;
+
+            enemy.GetPushed(new Vector3(0, 0, 4));
+        }
     }
 }
