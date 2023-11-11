@@ -26,6 +26,8 @@ public class PlayerPush : MonoBehaviour
     private PlayerCameraPosition camPos;
     [SerializeField]
     private PlayerHealth _health;
+    [SerializeField]
+    private Animator _anim;
 
     
     [Space(10), SerializeField]
@@ -123,6 +125,7 @@ public class PlayerPush : MonoBehaviour
         if(_interactions.currentWeaponData != null)
             pushVelocity *= _interactions.currentWeaponData.pushVelocity;
 
+        _anim.SetTrigger("Push");
         _quickTimeEventUI.SetActive(false);
         enemy.GetPushed(pushVelocity);
         StartCoroutine(PushBeingFinnished());
