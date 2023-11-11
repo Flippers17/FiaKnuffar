@@ -81421,6 +81421,132 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927293549}
   m_Mesh: {fileID: -5852286375780045605, guid: 0010e2e3108f02d488593301927e629c, type: 3}
+--- !u!1 &927324455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8931952743588340506, guid: 19b8ee5249d248743937d788f41e3400,
+    type: 3}
+  m_PrefabInstance: {fileID: 2114776129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &927324459
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927324455}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 620100021503437348, guid: c16f756b1565be248902f786478639ea,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &927324460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927324455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac228159e0c2a2742b029475a06029a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 927324459}
+  _sounds:
+  - {fileID: 8300000, guid: f8ee51fcf4bf7d74b9dd9c8ddeb5a19f, type: 3}
+  - {fileID: 8300000, guid: df54aa38e36c6b84a951036344246711, type: 3}
+  - {fileID: 8300000, guid: d1b3439777481f54190579d743872d84, type: 3}
+  - {fileID: 8300000, guid: 0d5d6f873bd9ae342a0318ed7c200bb9, type: 3}
+  - {fileID: 8300000, guid: 74418ab3819b62547a89f29e1a102318, type: 3}
+  - {fileID: 8300000, guid: 719f6f66d5537a544adcd6c010b2663b, type: 3}
+  - {fileID: 8300000, guid: 61d2788f31ce8fb49a1755433cd9654e, type: 3}
+  - {fileID: 8300000, guid: 0c5e0411b0be867488c761eaeaf6b866, type: 3}
+  - {fileID: 8300000, guid: cbbdadaea4a63b94a8896ca49ae79e6a, type: 3}
 --- !u!1 &930028187
 GameObject:
   m_ObjectHideFlags: 0
@@ -186140,6 +186266,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1240446571, guid: 19b8ee5249d248743937d788f41e3400, type: 3}
+      propertyPath: _audioPlayer
+      value: 
+      objectReference: {fileID: 927324460}
     - target: {fileID: 1988484836211108736, guid: 19b8ee5249d248743937d788f41e3400,
         type: 3}
       propertyPath: m_LocalPosition.y
