@@ -343,7 +343,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   halfBoxSize: {x: 1, y: 1, z: 1}
-  fallSpeed: 8
+  fallSpeed: 7.5
   _pushVelocity: {x: 0, y: 3, z: 4}
   _input: {fileID: 4904071439811853370}
   _interactions: {fileID: 6303257942190081103}

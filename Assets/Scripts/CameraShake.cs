@@ -10,7 +10,7 @@ public class CameraShake : MonoBehaviour
 
     private void Awake()
     {
-        initialPosition = transform.position;
+        initialPosition = transform.localPosition;
     }
 
     public static void TriggerShake(float duration, float _shakeMagnitude, float _dampingSpeed)

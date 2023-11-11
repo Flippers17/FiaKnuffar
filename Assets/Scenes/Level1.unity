@@ -81421,12 +81421,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927293549}
   m_Mesh: {fileID: -5852286375780045605, guid: 0010e2e3108f02d488593301927e629c, type: 3}
---- !u!95 &927324456 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 503258618, guid: 19b8ee5249d248743937d788f41e3400,
-    type: 3}
-  m_PrefabInstance: {fileID: 2114776129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &930028187
 GameObject:
   m_ObjectHideFlags: 0
@@ -186280,11 +186274,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6303257942190081103, guid: 19b8ee5249d248743937d788f41e3400,
-        type: 3}
-      propertyPath: _anim
-      value: 
-      objectReference: {fileID: 927324456}
     - target: {fileID: 9182876712576077348, guid: 19b8ee5249d248743937d788f41e3400,
         type: 3}
       propertyPath: _camHolder

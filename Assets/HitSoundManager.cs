@@ -25,6 +25,7 @@ public class HitSoundManager : MonoBehaviour
     {
         AudioClip clip = _hitsSounds[Random.Range(0, _hitsSounds.Count)];
 
+        CameraShake.TriggerShake(.4f, .3f, .9f);
         _source.PlayOneShot(clip);
     }
 }

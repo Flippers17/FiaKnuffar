@@ -202,7 +202,7 @@ public class PlayerPush : MonoBehaviour
 
         if (_interactions.currentWeaponData != null)
             newPushVelocity *= _interactions.currentWeaponData.pushVelocity;
-
+        CameraShake.TriggerShake(.1f, .05f, .9f);
         _currentEnemy.GetPushed(newPushVelocity);
     }
 
@@ -250,6 +250,10 @@ public class PlayerPush : MonoBehaviour
     {
         Vector3 moveDir = fallPos - transform.position;
         moveDir.Normalize();
+        
+        yield return new WaitForSeconds(.6f);
+
+        _currentEnemy.GetPushed(new Vector3(0,0,fallSpeed));
 
         while (Vector3.Distance(transform.position, fallPos) > 0.1f)
         {
