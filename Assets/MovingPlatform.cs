@@ -23,11 +23,11 @@ public class MovingPlatform : MonoBehaviour
     private void Update()
     {
         if (_isMoving && Vector3.Distance(transform.position, _targetPos) > 0.1f)
-            transform.position = Vector3.Slerp(transform.position, _targetPos, lerpSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _targetPos, lerpSpeed * Time.deltaTime);
     }
 
     public void MoveToPosition()
     {
-
+        _isMoving = true;
     }
 }
