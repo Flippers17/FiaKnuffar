@@ -56,7 +56,7 @@ MonoBehaviour:
   _audio: {fileID: 726065026927918413}
   _anim: {fileID: 789272653}
   _fallPosition: {x: 0, y: 0, z: 0}
-  defense: 2
+  defense: 1
   quickTimeSpeed: 50
   greenZone: {x: 40, y: 60}
   OnFall:

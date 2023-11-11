@@ -46,6 +46,8 @@ public class PlayerPush : MonoBehaviour
     private bool doingPush = false;
     private bool _falling = false;
 
+    private int quickTimeEventsLeft = 0;
+
 
     private void OnEnable()
     {
@@ -133,6 +135,7 @@ public class PlayerPush : MonoBehaviour
 
         _currentGreenZone.Item1 = Mathf.Max(0, _currentGreenZone.Item1);
         _currentGreenZone.Item2 = Mathf.Min(100, _currentGreenZone.Item2);
+        quickTimeEventsLeft = enemy.defense;
 
         quickTimeValue = 1;
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
@@ -141,6 +144,14 @@ public class PlayerPush : MonoBehaviour
 
     private void FinishPush()
     {
+        if(quickTimeEventsLeft > 1)
+        {
+            quickTimeEventsLeft--;
+            quickTimeValue = 1;
+            //Play audio queue
+            return;
+        }
+
         _anim.SetTrigger("Push");
         _quickTimeEventUI.SetActive(false);
         StartCoroutine(PushBeingFinnished());
