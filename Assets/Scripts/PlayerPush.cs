@@ -19,6 +19,8 @@ public class PlayerPush : MonoBehaviour
     [Space(20), SerializeField]
     private PlayerInputHandler _input;
     [SerializeField]
+    private PlayerInteractions _interactions;
+    [SerializeField]
     private GameObject _quickTimeEventUI;
     [SerializeField]
     private PlayerCameraPosition camPos;
@@ -91,9 +93,24 @@ public class PlayerPush : MonoBehaviour
     {
         camPos.SetZoom(true);
         _quickTimeEventUI.SetActive(true);
+
         quickTimeSpeed = enemy.quickTimeSpeed;
         _currentGreenZone.Item1 = enemy.greenZone.x;
         _currentGreenZone.Item2 = enemy.greenZone.y;
+
+        if (_interactions.currentWeaponData != null)
+        {
+            float greenZoneDif =  (_interactions.currentWeaponData.greenZoneMultiplier * (_currentGreenZone.Item2 - _currentGreenZone.Item1)) - (_currentGreenZone.Item2 - _currentGreenZone.Item1);
+
+            _currentGreenZone.Item1 -= Mathf.FloorToInt(greenZoneDif/2);
+            _currentGreenZone.Item2 += Mathf.FloorToInt(greenZoneDif/2);
+
+            quickTimeSpeed *= _interactions.currentWeaponData.quickTimeSpeedMultiplier;
+        }
+
+        _currentGreenZone.Item1 = Mathf.Max(0, _currentGreenZone.Item1);
+        _currentGreenZone.Item2 = Mathf.Min(100, _currentGreenZone.Item2);
+
         doingPush = true;
         quickTimeValue = 1;
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
@@ -103,6 +120,9 @@ public class PlayerPush : MonoBehaviour
 
     private void FinishPush(EnemyBehaviour enemy, Vector3 pushVelocity)
     {
+        if(_interactions.currentWeaponData != null)
+            pushVelocity *= _interactions.currentWeaponData.pushVelocity;
+
         _quickTimeEventUI.SetActive(false);
         enemy.GetPushed(pushVelocity);
         StartCoroutine(PushBeingFinnished());
