@@ -85,9 +85,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerPush.GetPushState())
         {
-            velocity.x = 0;
-            velocity.z = 0;
-            _anim.SetFloat("Speed", 0);
+            if (!_playerPush.GetFallState())
+            {
+                velocity.x = 0;
+                velocity.z = 0;
+                _anim.SetFloat("Speed", 0);
+            }
             return;
         }
 

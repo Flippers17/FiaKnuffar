@@ -151,6 +151,12 @@ public class PlayerPush : MonoBehaviour
     {
         return doingPush;
     }
+    
+    
+    public bool GetFallState()
+    {
+        return _falling;
+    }
 
 
     public void Fall()
