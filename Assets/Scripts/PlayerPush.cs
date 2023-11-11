@@ -236,7 +236,10 @@ public class PlayerPush : MonoBehaviour
         _quickTimeEventUI.SetActive(false);
         _falling = true;
         GetComponent<CharacterController>().enabled = false;
-        StartCoroutine(Falling(_currentEnemy._fallPosition));
+        if(_currentEnemy)
+            StartCoroutine(Falling(_currentEnemy._fallPosition));
+        else
+            StartCoroutine(Falling(transform.position));
     }
 
     private IEnumerator Falling(Vector3 fallPos)
