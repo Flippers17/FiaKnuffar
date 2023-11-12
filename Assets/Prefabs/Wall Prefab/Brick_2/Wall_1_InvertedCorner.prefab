@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3018435903351114517}
   - component: {fileID: 2183252837642290352}
   - component: {fileID: 4154728619116638330}
+  - component: {fileID: 8129114633282334779}
   m_Layer: 0
   m_Name: Wall_1_InvertedCorner
   m_TagString: Untagged
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8129114633282334779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2497373376439849391}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.647168, y: 3.5, z: 2.6471698}
+  m_Center: {x: -1.323584, y: -1.75, z: 1.1264151}

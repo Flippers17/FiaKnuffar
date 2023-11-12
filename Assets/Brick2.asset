@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc3c6a526d7c684b81cb2cefc98626d, type: 3}
+  m_Name: Brick2
+  m_EditorClassIdentifier: 
+  wall: {fileID: 1944343636948164740, guid: ea5533bbc89688e4e879ec303f3eb5c4, type: 3}
+  corner: {fileID: 1646280633820879384, guid: 96544297794836642bc23b017d1da433, type: 3}
+  invertedCorner: {fileID: 2497373376439849391, guid: 9b9d15929148e0c4e9c4011ab96a6f2f,
+    type: 3}
+  topWall: {fileID: 6941676776714627785, guid: 99762407f6376a549ab14c58a9222e28, type: 3}
+  topCorner: {fileID: 4280860776111393811, guid: f576a4228317af243b3c4bc185e10a5e,
+    type: 3}
+  topInvertedCorner: {fileID: 1531257381660139871, guid: d716a58db89ff4546bf78e32fd58d315,
+    type: 3}
