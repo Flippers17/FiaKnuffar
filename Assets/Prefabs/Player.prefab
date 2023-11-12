@@ -374,7 +374,7 @@ MonoBehaviour:
     m_Bits: 128
   _input: {fileID: 4904071439811853370}
   weaponHolder: {fileID: 1820713121603941246}
-  _throwForce: 50
+  _throwForce: 35
   _dropDistance: 1.5
   _anim: {fileID: 503258618}
 --- !u!114 &9182876712576077348

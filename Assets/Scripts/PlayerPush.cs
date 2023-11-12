@@ -151,7 +151,7 @@ public class PlayerPush : MonoBehaviour
         {
             timeSinceSwitched = 0;
             quickTimeEventsLeft--;
-            quickTimeValue = 1;
+            quickTimeValue = 20;
             SetQuickTimeStats(_currentEnemy.quickTimeEvents[_currentEnemy.quickTimeEvents.Count - quickTimeEventsLeft]);
             //Play audio queue
             return;

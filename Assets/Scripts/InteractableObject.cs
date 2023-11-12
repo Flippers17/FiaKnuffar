@@ -82,6 +82,8 @@ public class InteractableObject : MonoBehaviour
             if (enemy.quickTimeEvents.Count > throwAttack)
                 return;
 
+            isThrown = false;
+            ReduceDurabillity();
             enemy.GetPushed(new Vector3(0, 0, 4));
         }
     }
