@@ -116,6 +116,7 @@ public class PlayerInteractions : MonoBehaviour
     private void OnWeaponDie()
     {
         Destroy(_currentHeldObject.gameObject);
+        _anim.SetBool("HasWeapon", false);
     }
 
     private void OnDrawGizmos()
