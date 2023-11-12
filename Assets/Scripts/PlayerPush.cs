@@ -85,7 +85,7 @@ public class PlayerPush : MonoBehaviour
 
     private void TryPush()
     {
-        if (_falling || timeSinceSwitched < inputDelay)
+        if (_falling || timeSinceSwitched < inputDelay || finishingPush)
             return;
         
         if (!doingPush)
@@ -214,6 +214,7 @@ public class PlayerPush : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         camPos.SetZoom(false);
         doingPush = false;
+        finishingPush = false;
     }
 
     private void FailPush()
