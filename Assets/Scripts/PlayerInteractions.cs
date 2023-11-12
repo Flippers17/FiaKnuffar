@@ -98,7 +98,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         _currentHeldObject.transform.parent = weaponHolder;
         _currentHeldObject.transform.localPosition = Vector3.zero;
-        _currentHeldObject.transform.rotation = Quaternion.identity;
+        _currentHeldObject.transform.localRotation = Quaternion.identity;
+        _currentHeldObject.OutOfRange();
         _currentHeldObject.OnDie += OnWeaponDie;
 
         _anim.SetBool("HasWeapon", true);
