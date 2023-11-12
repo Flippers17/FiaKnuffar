@@ -85,7 +85,7 @@ public class PlayerPush : MonoBehaviour
 
     private void TryPush()
     {
-        if (_falling || timeSinceSwitched < inputDelay)
+        if (_falling || timeSinceSwitched < inputDelay || finishingPush)
             return;
         
         if (!doingPush)
@@ -189,7 +189,7 @@ public class PlayerPush : MonoBehaviour
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
 
         if (_currentQuickTimeType == QuickTimeType.mashing)
-            quickTimeValue = 20;
+            quickTimeValue = _currentGreenZone.Item2;
         else if (_currentQuickTimeType == QuickTimeType.timing)
             quickTimeValue = 1;
     }
@@ -214,6 +214,7 @@ public class PlayerPush : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         camPos.SetZoom(false);
         doingPush = false;
+        finishingPush = false;
     }
 
     private void FailPush()
@@ -303,7 +304,7 @@ public class PlayerPush : MonoBehaviour
         if (quickTimeValue <= 1)
         {
             FailPush();
-            quickTimeValue = 20;
+            quickTimeValue = _currentGreenZone.Item2;
         }
     }
 }
