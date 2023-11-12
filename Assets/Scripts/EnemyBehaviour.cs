@@ -21,7 +21,6 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _fallPosition = _fallPoint.position;
         _rb.isKinematic = true;
     }
 
@@ -33,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         _audio.PlayRandomSound();
         _pushed = true;
+        _fallPosition = _fallPoint.position;
         StartCoroutine(GettingPushed(pushVelocity));
 
     }
