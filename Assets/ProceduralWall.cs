@@ -87,6 +87,7 @@ public class ProceduralWall : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(ProceduralWall))]
 public class WallEditor : Editor
@@ -103,3 +104,4 @@ public class WallEditor : Editor
         }
     }
 }
+#endif

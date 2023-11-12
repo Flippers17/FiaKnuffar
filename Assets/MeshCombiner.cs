@@ -22,7 +22,7 @@ public class MeshCombiner : MonoBehaviour
         Mesh newMesh = new Mesh();
         newMesh.name = "CombinedBig";
         newMesh.CombineMeshes(meshes, false, false);
-        Unwrapping.GenerateSecondaryUVSet(newMesh);  // This line is necessary!!
+        //Unwrapping.GenerateSecondaryUVSet(newMesh);  // This line is necessary!!
         meshFilterCombine.sharedMesh = newMesh;
     }
 }

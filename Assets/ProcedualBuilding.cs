@@ -27,6 +27,8 @@ public class ProcedualBuilding : MonoBehaviour
     }
 }
 
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(ProcedualBuilding))]
 public class BuildingEditor : Editor
 {
@@ -41,3 +43,4 @@ public class BuildingEditor : Editor
         }
     }
 }
+#endif
