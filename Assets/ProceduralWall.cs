@@ -7,8 +7,7 @@ using UnityEngine;
 [SelectionBase]
 public class ProceduralWall : MonoBehaviour
 {
-    [SerializeField]
-    private WallSet wallSet;
+    public WallSet wallSet;
 
     public Vector2 _size = Vector2.one;
     [SerializeField]

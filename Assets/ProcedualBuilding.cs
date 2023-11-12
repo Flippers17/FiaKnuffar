@@ -7,6 +7,9 @@ public class ProcedualBuilding : MonoBehaviour
 {
     [SerializeField]
     private List<ProceduralWall> walls;
+    
+    [SerializeField]
+    private WallSet wallSet;
 
     [SerializeField]
     private float height = 40f;
@@ -17,6 +20,7 @@ public class ProcedualBuilding : MonoBehaviour
         foreach (ProceduralWall wall in walls)
         {
             wall._size.y = height;
+            wall.wallSet = wallSet;
             wall.ClearWall();
             wall.UpdateWall();
         }
