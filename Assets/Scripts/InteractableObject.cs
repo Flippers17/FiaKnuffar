@@ -13,6 +13,7 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] private GameObject _outlineGO;
     [SerializeField] private int throwAttack = 1;
     [SerializeField] private int durabillity = 1;
+    [SerializeField] private GameObject _breakEffect;
 
     public UnityAction OnDie;
 
@@ -65,6 +66,7 @@ public class InteractableObject : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(_breakEffect, transform.position, Quaternion.identity);
         OnDie?.Invoke();
     }
 
