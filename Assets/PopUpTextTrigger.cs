@@ -30,14 +30,13 @@ public class PopUpTextTrigger : MonoBehaviour
     {
         if (_beingShown)
         {
-            if(_timeShown < _timeSinceShown)
+            if(_timeSinceShown < _timeShown)
             {
                 _timeSinceShown += Time.deltaTime;
             }
             else
             {
                 _uiText.text = "";
-                _beingShown=false;
             }
         }
     }
