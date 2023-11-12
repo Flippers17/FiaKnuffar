@@ -189,7 +189,7 @@ public class PlayerPush : MonoBehaviour
         _setGreenZoneEvent.Invoke(_currentGreenZone.Item1, _currentGreenZone.Item2);
 
         if (_currentQuickTimeType == QuickTimeType.mashing)
-            quickTimeValue = 20;
+            quickTimeValue = _currentGreenZone.Item2;
         else if (_currentQuickTimeType == QuickTimeType.timing)
             quickTimeValue = 1;
     }
@@ -303,7 +303,7 @@ public class PlayerPush : MonoBehaviour
         if (quickTimeValue <= 1)
         {
             FailPush();
-            quickTimeValue = 20;
+            quickTimeValue = _currentGreenZone.Item2;
         }
     }
 }
