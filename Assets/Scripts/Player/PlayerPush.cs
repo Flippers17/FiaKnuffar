@@ -54,6 +54,9 @@ public class PlayerPush : MonoBehaviour
 
     [SerializeField]
     private float inputDelay = 0.3f;
+    /// <summary>
+    /// Time since we last switched from one quick time event to another. Used with inputDelay to prevent accidental fails when spamming.
+    /// </summary>
     private float timeSinceSwitched = 0;
 
 
@@ -85,7 +88,7 @@ public class PlayerPush : MonoBehaviour
 
     private void TryPush()
     {
-        if (_falling || timeSinceSwitched < inputDelay || finishingPush)
+        if (!CanDoPushing())
             return;
         
         if (!doingPush)
@@ -97,24 +100,34 @@ public class PlayerPush : MonoBehaviour
             InitiatePush(enemies[0].gameObject.GetComponent<EnemyBehaviour>());
         }
         else
-        {
-            if(_currentQuickTimeType == QuickTimeType.timing)
-            {
-                if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
-                    FinishPush();
-                else
-                    FailPush();
-            }
-            else if(_currentQuickTimeType == QuickTimeType.mashing)
-            {
-                quickTimeValue += mashSpeed;
-                _updateQuickTimeValueEvent.Invoke(quickTimeValue);
-                if(quickTimeValue >= 100)
-                    FinishPush();
-            }
+            HandleQuickTimeProgression();
+    }
 
+
+    private void HandleQuickTimeProgression()
+    {
+        if (_currentQuickTimeType == QuickTimeType.timing)
+        {
+            if (quickTimeValue > _currentGreenZone.Item1 && quickTimeValue < _currentGreenZone.Item2)
+                FinishPush();
+            else
+                FailPush();
+        }
+        else if (_currentQuickTimeType == QuickTimeType.mashing)
+        {
+            quickTimeValue += mashSpeed;
+            _updateQuickTimeValueEvent.Invoke(quickTimeValue);
+            if (quickTimeValue >= 100)
+                FinishPush();
         }
     }
+
+
+    private bool CanDoPushing()
+    {
+        return !(_falling || timeSinceSwitched < inputDelay || finishingPush);
+    }
+
 
     private void InitiatePush(EnemyBehaviour enemy)
     {
@@ -220,9 +233,6 @@ public class PlayerPush : MonoBehaviour
     private void FailPush()
     {
         _health.TakeDamage(1);
-        //camPos.SetZoom(false);
-        //_quickTimeEventUI.SetActive(false);
-        //doingPush = false;
     }
 
     public bool GetPushState()
@@ -245,6 +255,8 @@ public class PlayerPush : MonoBehaviour
         camPos.SetCameraFollow(false);
         _quickTimeEventUI.SetActive(false);
         GetComponent<CharacterController>().enabled = false;
+
+
         if(_currentEnemy && !_falling)
             StartCoroutine(Falling(_currentEnemy._fallPosition));
         else if(!_falling)

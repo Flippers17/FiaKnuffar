@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         OnDamageTaken?.Invoke();
         _updateHealthEvent.Invoke(health);
+
+
         if(health <= 0)
         {
             OnDie?.Invoke();
